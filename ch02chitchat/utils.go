@@ -2,8 +2,14 @@ package main
 
 import (
 	"errors"
+	"fmt"
+	"gowebprog/ch02chitchat/data"
+	"html/template"
+	"log"
 	"net/http"
 )
+
+var logger *log.Logger
 
 func session(w http.ResponseWriter, r *http.Request) (sess data.Session, err error) {
 	cookie, err := r.Cookie("_cookie")
@@ -14,4 +20,18 @@ func session(w http.ResponseWriter, r *http.Request) (sess data.Session, err err
 		}
 	}
 	return
+}
+
+func generateHTML(w http.ResponseWriter, data interface{}, fn ...string) {
+	var files []string
+	for _, file := range fn {
+		files = append(files, fmt.Sprintf("templates/%s.html", file))
+	}
+	templates := template.Must(template.ParseFiles(files...))
+	templates.ExecuteTemplate(w, "layout", data)
+}
+
+func danger(args ...interface{}) {
+	logger.SetPrefix("ERROR ")
+	logger.Println(args...)
 }
