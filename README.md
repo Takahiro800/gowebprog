@@ -21,3 +21,6 @@ source .zshrc
 [参考記事](https://teratail.com/questions/243773)
 `psql -U postgres`
 `postgres=# CREATE ROLE {username} LOGIN CREATEROLE PASSWORD {password}`
+
+# 外部packageを利用する場合
+`go get ~`をターミナルで実施する
