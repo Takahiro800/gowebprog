@@ -7,14 +7,15 @@ import (
 
 type MyHandler struct{}
 
-func (h *MyHandler) ServerHTTP(w http.ResponseWriter, r *http.Request) {
+func (h *MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World!")
 }
 
 func main() {
-	handler := MyHandler{}
+	handler := MyHandler{} // handlerはハンドラ。
 	server := http.Server{
-		Addr:    "127.0.0.1:8080",
+		Addr: "127.0.0.1:8080",
+		//		Addr:    ":8080", // これでもOK
 		Handler: &handler,
 	}
 	server.ListenAndServe()
