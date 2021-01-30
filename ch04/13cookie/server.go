@@ -11,12 +11,14 @@ func setCookie(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 	}
 	c2 := http.Cookie{
-		Name:     "second_cookie",
-		Value:    "Manning Publications Co",
+		Name:     "second_cookietest",
+		Value:    "Manning Publications test",
 		HttpOnly: true,
 	}
-	w.Header().Set("Set-Cookie", c1.String())
-	w.Header().Add("Set-Cookie", c2.String())
+	// w.Header().Set("Set-Cookie", c1.String())
+	// w.Header().Add("Set-Cookie", c2.String())
+	http.SetCookie(w, &c1)
+	http.SetCookie(w, &c2)
 }
 
 func main() {
